@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Salón de Belleza</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--sidebar-bg:#ff9f1c;--accent-pink:#ff2e93;--light-pink:#ffb6c9;--soft-bg:#ffe3ec;--text-color:#1a1a1a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',Arial,sans-serif;display:flex;min-height:100vh;background:#fff;color:var(--text-color);overflow-x:hidden}
+  .sidebar{width:260px;background:var(--sidebar-bg);position:sticky;top:0;height:100vh;padding:30px 16px;border-radius:0 32px 32px 0;flex-shrink:0;display:flex;flex-direction:column;gap:20px;z-index:100}
+  .sidebar-header{text-align:center;padding-bottom:10px;border-bottom:2px dashed rgba(0,0,0,.15)}
+  .sidebar-header h2{font-size:1.15rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px}
+  .nav-list{display:flex;flex-direction:column;gap:8px;list-style:none}
+  .nav-item{display:flex;align-items:center;gap:14px;text-decoration:none;color:rgba(0,0,0,.65);font-weight:700;font-size:1rem;padding:12px 16px;border-radius:14px;transition:.25s;white-space:nowrap}
+  .nav-item:hover,.nav-item.active{background:#000;color:var(--sidebar-bg);transform:translateX(6px)}
+  main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .banner-header{text-align:center;padding:30px 20px 10px;background:linear-gradient(180deg,#fce4ec 0%,#f7d6c8 100%)}
+  .titulo h1{line-height:1.3;font-weight:800;font-size:clamp(1.8rem,3.5vw,2.6rem);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
+  .titulo .l1{background:var(--light-pink);padding:6px 20px;border-radius:20px;transform:rotate(-2deg)}
+  .titulo .l2{background:#1a1a1a;color:#fff;padding:6px 20px;border-radius:20px}
+  .titulo .l3{background:var(--accent-pink);color:#fff;padding:6px 20px;border-radius:20px;transform:rotate(1deg)}
+  .stage-container{position:relative;width:100%;height:450px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#f7d6c8 0%,#fff 100%);perspective:1400px;overflow:hidden}
+  .carousel-track{position:relative;width:240px;height:340px;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.25,1,.5,1)}
+  .carousel-card{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 20px 30px rgba(0,0,0,.15);border:4px solid #fff}
+  .carousel-card img{width:100%;height:100%;object-fit:cover;display:block}
+  .flecha{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);color:var(--accent-pink);border:none;width:50px;height:50px;border-radius:50%;font-size:1.6rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 15px rgba(0,0,0,.15)}
+  .flecha:hover{background:#000;color:#fff}
+  .flecha-prev{left:25px}.flecha-next{right:25px}
+  .carousel{background:#1a1a1a;padding:20px 0;overflow:hidden;white-space:nowrap}
+  .image-container{display:grid;grid-auto-flow:column;grid-auto-columns:250px;justify-items:stretch;animation:animation 12s linear infinite;gap:15px;width:max-content}
+  .image-container img{width:250px;height:170px;object-fit:cover;border-radius:12px;display:block}
+  @keyframes animation{to{translate:calc(-50% - 7.5px)}}
+  .carousel:hover .image-container{animation-play-state:paused}
+  .categorias{background:linear-gradient(180deg,#fff,var(--soft-bg));padding:60px 30px}
+  .categorias h2{text-align:center;margin-bottom:40px;font-size:2rem;font-weight:800}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:35px;justify-items:center;max-width:1100px;margin:0 auto}
+  .cat{text-align:center;text-decoration:none;color:var(--text-color);font-weight:700;font-size:1.1rem;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+  .cat .fig{width:150px;height:150px;background:#f4c6d4;margin-bottom:14px;transition:.3s;box-shadow:0 10px 20px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;font-size:2rem}
+  .cat:hover .fig{transform:translateY(-8px) scale(1.05);background:var(--light-pink)}
+  .circulo{border-radius:50%}.cuadrado{border-radius:22px}.rectangulo{width:190px!important;height:130px!important;border-radius:14px}
+  .triangulo{clip-path:polygon(50% 0%,0% 100%,100% 100%)}
+  .diamante{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
+  .corazon{clip-path:url(#heart)}
+  svg.heart-clip{position:absolute;width:0;height:0}
+
+  /* ===== NUEVO - INFO DE CADA CATEGORÍA PARA MUJER ===== */
+  .info-seccion{padding:50px 30px;max-width:1000px;margin:0 auto}
+  .info-card{background:#fff;border:2px solid #ffe3ec;border-radius:24px;padding:28px;margin-bottom:30px;box-shadow:0 10px 25px rgba(0,0,0,.06);scroll-margin-top:20px}
+  .info-card h3{font-size:1.6rem;margin-bottom:10px}
+  .info-card h3 span{background:var(--light-pink);padding:4px 14px;border-radius:20px;font-size:1rem;vertical-align:middle}
+  .info-card p{color:#555;line-height:1.7;margin-bottom:12px}
+  .info-card ul{padding-left:20px;color:#444;line-height:1.8}
+  .info-card b{color:#000}
+  .info-card .tip{background:#fff8e1;border-radius:14px;padding:14px;margin-top:12px}
+  .volver{display:inline-block;margin-top:12px;background:#000;color:#fff;padding:8px 16px;border-radius:20px;font-size:.9rem;text-decoration:none}
+
+  @media(max-width:900px){
+    body{flex-direction:column}
+    .sidebar{width:100%;height:auto;border-radius:0 0 24px 24px;padding:12px 16px;gap:10px}
+    .sidebar-header{display:none}
+    .nav-list{flex-direction:row;overflow-x:auto;width:100%}
+    .nav-item{padding:8px 14px;font-size:.9rem}
+    .stage-container{height:380px}.carousel-track{width:190px;height:270px}
+  }
+</style>
+</head>
+<body>
+
+<svg class="heart-clip"><clipPath id="heart" clipPathUnits="objectBoundingBox"><path d="M0.5,0.95 C0.1,0.65 0,0.4 0,0.28 C0,0.1 0.15,0 0.28,0 C0.4,0 0.47,0.07 0.5,0.15 C0.53,0.07 0.6,0 0.72,0 C0.85,0 1,0.1 1,0.28 C1,0.4 0.9,0.65 0.5,0.95 Z"/></clipPath></svg>
+
+<nav class="sidebar">
+  <div class="sidebar-header"><h2>Mis Secciones</h2></div>
+  <ul class="nav-list">
+    <li><a href="#categorias" class="nav-item active"><span>🎨 Color</span></a></li>
+    <li><a href="#categorias" class="nav-item"><span>✂️ Cortes</span></a></li>
+    <li><a href="#categorias" class="nav-item"><span>💧 Tratamientos</span></a></li>
+    <li><a href="#categorias" class="nav-item"><span>💇‍♀️ Extensiones</span></a></li>
+    <li><a href="#categorias" class="nav-item"><span>🧖‍♀️ Spa</span></a></li>
+    <li><a href="#categorias" class="nav-item"><span>✨ Alaciados</span></a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="banner-header">
+    <div class="titulo"><h1><span class="l1">Transforma</span><span class="l2">Brilla</span><span class="l3">Enamora tu pelo</span></h1></div>
+  </div>
+
+  <!-- CARRUSEL 3D - IGUAL, SOLO IMÁGENES -->
+  <section class="stage-container">
+    <button class="flecha flecha-prev" id="prevBtn">&#10094;</button>
+    <div class="carousel-track" id="track">
+      <div class="carousel-card"><img src="img.png"></div>
+      <div class="carousel-card"><img src="img_1.png"></div>
+      <div class="carousel-card"><img src="img_2.png"></div>
+      <div class="carousel-card"><img src="img_3.png"></div>
+      <div class="carousel-card"><img src="pelo.jpg"></div>
+    </div>
+    <button class="flecha flecha-next" id="nextBtn">&#10095;</button>
+  </section>
+
+  <!-- CARRUSEL INFINITO - IGUAL -->
+  <div class="carousel">
+    <div class="image-container">
+      <img src="img.png"><img src="img_1.png"><img src="img_2.png"><img src="img_3.png"><img src="pelo.jpg">
+      <img src="img.png"><img src="img_1.png"><img src="img_2.png"><img src="img_3.png"><img src="pelo.jpg">
+    </div>
+  </div>
+
+  <!-- CATEGORÍAS - AHORA CADA UNA TE LLEVA A SU INFO -->
+  <section class="categorias" id="categorias">
+    <h2>Nuestras Categorías</h2>
+    <p style="text-align:center;color:#777;margin:-25px 0 30px">Pícale a una figura para ver su información</p>
+    <div class="grid">
+      <a class="cat" href="#info-color"><div class="fig circulo">🎨</div>Color</a>
+      <a class="cat" href="#info-cortes"><div class="fig cuadrado">✂️</div>Cortes</a>
+      <a class="cat" href="#info-tratamientos"><div class="fig rectangulo">💧</div>Tratamientos</a>
+      <a class="cat" href="#info-extensiones"><div class="fig triangulo">💇‍♀️</div>Extensiones</a>
+      <a class="cat" href="#info-spa"><div class="fig diamante">🧖‍♀️</div>Spa</a>
+      <a class="cat" href="#info-alaciados"><div class="fig corazon">✨</div>Alaciados</a>
+    </div>
+  </section>
+
+  <!-- ===== INFO PARA MUJER - TODO NUEVO ABAJO ===== -->
+  <section class="info-seccion">
+
+    <div class="info-card" id="info-color">
+      <h3>🎨 Color para Mujer <span>Lo más pedido</span></h3>
+      <p>El color no es solo pintarte el pelo, es cambiar tu luz. Para mujer trabajamos según tu tono de piel, tu base natural y cuánto mantenimiento quieres.</p>
+      <ul>
+        <li><b>Tinte completo:</b> Un solo color, cubre canas, da brillo. Ideal si quieres un cambio parejo.</li>
+        <li><b>Balayage:</b> Mechas difuminadas desde medios a puntas, se ve natural y no se marca la raíz.</li>
+        <li><b>Mechas / Babylights:</b> Luces finitas para dar luz sin decolorar todo.</li>
+        <li><b>Fantasía:</b> Rosa, rojo, morado, azul. Necesita decoloración y retoque cada 3-4 semanas.</li>
+        <li><b>Corrección de color:</b> Cuando el color quedó manchado o muy oscuro, se corrige poco a poco.</li>
+      </ul>
+      <div class="tip">💡 <b>Tip de mujer:</b> Si es tu primera vez, empieza con balayage o babylights, no maltrata tanto y se ve super natural.</div>
+      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+    </div>
+
+    <div class="info-card" id="info-cortes">
+      <h3>✂️ Cortes para Mujer <span>Según tu cara</span></h3>
+      <p>Un buen corte le da forma a tu cara y te hace ver más arreglada aunque no te peines.</p>
+      <ul>
+        <li><b>Capas:</b> Dan movimiento y volumen, perfectas para pelo largo y ondulado.</li>
+        <li><b>Bob:</b> Corto a la altura de la barbilla, se ve elegante y juvenil.</li>
+        <li><b>Long Bob / Lob:</b> Bob largo hasta los hombros, el más pedido.</li>
+        <li><b>Fleco / Flequillo:</b> Cortina, recto o de lado. Cambia toda la cara.</li>
+        <li><b>Degrafilado:</b> Para quitar peso y que el pelo no se vea tan grueso.</li>
+      </ul>
+      <div class="tip">💡 <b>Tip de mujer:</b> Si tienes cara redonda, te quedan mejor las capas largas. Si tienes cara alargada, el fleco cortina te favorece mucho.</div>
+      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+    </div>
+
+    <div class="info-card" id="info-tratamientos">
+      <h3>💧 Tratamientos para Mujer <span>Repara tu pelo</span></h3>
+      <p>Si tu pelo está seco, quebrado o quemado por la plancha o el tinte, esto es lo que necesita.</p>
+      <ul>
+        <li><b>Hidratación profunda:</b> Mascarilla + vapor, devuelve suavidad y brillo.</li>
+        <li><b>Reconstrucción / Botox capilar:</b> Rellena el pelo quebrado, lo deja fuerte y sin frizz.</li>
+        <li><b>Tratamiento para caída:</b> Masaje + ampollas para fortalecer la raíz.</li>
+        <li><b>Tratamiento para puntas abiertas:</b> Sella y repara sin tener que cortar todo.</li>
+      </ul>
+      <div class="tip">💡 <b>Tip de mujer:</b> Después del tratamiento no te laves el pelo en 48 horas y no uses plancha muy caliente.</div>
+      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+    </div>
+
+    <div class="info-card" id="info-extensiones">
+      <h3>💇‍♀️ Extensiones para Mujer <span>Largo al instante</span></h3>
+      <p>¿Quieres pelo largo para mañana? Las extensiones te dan largo y volumen sin esperar años a que crezca.</p>
+      <ul>
+        <li><b>De clip:</b> Te las pones y te las quitas tú, para eventos.</li>
+        <li><b>De queratina:</b> Mechón por mechón, se ven super naturales y duran 2-3 meses.</li>
+        <li><b>Cortina cosida:</b> Para pelo grueso, da mucho volumen.</li>
+        <li><b>Tape / Adhesivas:</b> Cintas planas, no se notan y no maltratan tanto.</li>
+      </ul>
+      <div class="tip">💡 <b>Tip de mujer:</b> Para que no se noten, el color de la extensión debe ser igual al de tus puntas, no al de tu raíz.</div>
+      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+    </div>
+
+    <div class="info-card" id="info-spa">
+      <h3>🧖‍♀️ Spa Capilar para Mujer <span>Relájate</span></h3>
+      <p>Es como un spa pero para tu cabeza. Limpia, relaja y deja el pelo suavecito.</p>
+      <ul>
+        <li><b>Limpieza profunda:</b> Quita grasa, caspa y restos de producto.</li>
+        <li><b>Masaje capilar:</b> Activa la circulación y ayuda a que crezca más fuerte.</li>
+        <li><b>Mascarilla + vapor:</b> Hidratación intensa con toalla caliente.</li>
+        <li><b>Aromaterapia:</b> Aceites de coco, argán o lavanda para relajarte.</li>
+      </ul>
+      <div class="tip">💡 <b>Tip de mujer:</b> Hazte spa 1 vez al mes si te planchas mucho o si tienes caspa o grasa.</div>
+      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+    </div>
+
+    <div class="info-card" id="info-alaciados">
+      <h3>✨ Alaciados para Mujer <span>Sin frizz</span></h3>
+      <p>Para tener el pelo lacio sin tener que plancharte todos los días.</p>
+      <ul>
+        <li><b>Keratina / Alaciado brasileño:</b> Alacia, quita frizz y da brillo. Dura 2-4 meses.</li>
+        <li><b>Alaciado japonés:</b> Deja el pelo super lacio, ideal si tienes pelo muy chino.</li>
+        <li><b>Botox alaciador:</b> Alacia un poco y repara, para pelo maltratado.</li>
+        <li><b>Alaciado exprés:</b> Solo quita frizz, no deja el pelo 100% lacio.</li>
+      </ul>
+      <div class="tip">💡 <b>Tip de mujer:</b> Después del alaciado usa shampoo sin sulfatos para que te dure más, si no se te cae en 2 semanas.</div>
+      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+  const cards=document.querySelectorAll('.carousel-card');
+  const prevBtn=document.getElementById('prevBtn');
+  const nextBtn=document.getElementById('nextBtn');
+  let currentIndex=0;
+  function updateCarousel(){
+    const total=cards.length;
+    cards.forEach((card,i)=>{
+      let offset=i-currentIndex;
+      if(offset < -Math.floor(total/2)) offset+=total;
+      if(offset > Math.floor(total/2)) offset-=total;
+      const absOffset=Math.abs(offset);
+      const translateX=offset*140;
+      const translateZ=-absOffset*180;
+      const rotateY=offset*-25;
+      const opacity=absOffset>2?0:1-absOffset*0.25;
+      const zIndex=10-absOffset;
+      card.style.transform=`translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+      card.style.opacity=opacity;
+      card.style.zIndex=zIndex;
+    });
+  }
+  nextBtn.addEventListener('click',()=>{currentIndex=(currentIndex+1)%cards.length;updateCarousel();});
+  prevBtn.addEventListener('click',()=>{currentIndex=(currentIndex-1+cards.length)%cards.length;updateCarousel();});
+  let autoSlide=setInterval(()=>{currentIndex=(currentIndex+1)%cards.length;updateCarousel();},4000);
+  const stage=document.querySelector('.stage-container');
+  stage.addEventListener('mouseenter',()=>clearInterval(autoSlide));
+  stage.addEventListener('mouseleave',()=>{autoSlide=setInterval(()=>{currentIndex=(currentIndex+1)%cards.length;updateCarousel();},4000);});
+  updateCarousel();
+</script>
+</body>
+</html>
