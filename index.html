@@ -29,24 +29,6 @@
   .flecha{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);color:var(--accent-pink);border:none;width:50px;height:50px;border-radius:50%;font-size:1.6rem;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 15px rgba(0,0,0,.15)}
   .flecha:hover{background:#000;color:#fff}
   .flecha-prev{left:25px}.flecha-next{right:25px}
-  .carousel{background:#1a1a1a;padding:20px 0;overflow:hidden;white-space:nowrap}
-  .image-container{display:grid;grid-auto-flow:column;grid-auto-columns:250px;justify-items:stretch;animation:animation 12s linear infinite;gap:15px;width:max-content}
-  .image-container img{width:250px;height:170px;object-fit:cover;border-radius:12px;display:block}
-  @keyframes animation{to{translate:calc(-50% - 7.5px)}}
-  .carousel:hover .image-container{animation-play-state:paused}
-  .categorias{background:linear-gradient(180deg,#fff,var(--soft-bg));padding:60px 30px}
-  .categorias h2{text-align:center;margin-bottom:40px;font-size:2rem;font-weight:800}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:35px;justify-items:center;max-width:1100px;margin:0 auto}
-  .cat{text-align:center;text-decoration:none;color:var(--text-color);font-weight:700;font-size:1.1rem;display:flex;flex-direction:column;align-items:center;cursor:pointer}
-  .cat .fig{width:150px;height:150px;background:#f4c6d4;margin-bottom:14px;transition:.3s;box-shadow:0 10px 20px rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;font-size:2rem}
-  .cat:hover .fig{transform:translateY(-8px) scale(1.05);background:var(--light-pink)}
-  .circulo{border-radius:50%}.cuadrado{border-radius:22px}.rectangulo{width:190px!important;height:130px!important;border-radius:14px}
-  .triangulo{clip-path:polygon(50% 0%,0% 100%,100% 100%)}
-  .diamante{clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)}
-  .corazon{clip-path:url(#heart)}
-  svg.heart-clip{position:absolute;width:0;height:0}
-
-  /* ===== NUEVO - INFO DE CADA CATEGORÍA PARA MUJER ===== */
   .info-seccion{padding:50px 30px;max-width:1000px;margin:0 auto}
   .info-card{background:#fff;border:2px solid #ffe3ec;border-radius:24px;padding:28px;margin-bottom:30px;box-shadow:0 10px 25px rgba(0,0,0,.06);scroll-margin-top:20px}
   .info-card h3{font-size:1.6rem;margin-bottom:10px}
@@ -55,8 +37,9 @@
   .info-card ul{padding-left:20px;color:#444;line-height:1.8}
   .info-card b{color:#000}
   .info-card .tip{background:#fff8e1;border-radius:14px;padding:14px;margin-top:12px}
-  .volver{display:inline-block;margin-top:12px;background:#000;color:#fff;padding:8px 16px;border-radius:20px;font-size:.9rem;text-decoration:none}
-
+  .btn-precios{display:inline-block;margin-top:12px;background:#ff2e93;color:#fff;font-weight:700;padding:11px 24px;border-radius:30px;border:none;cursor:pointer;font-family:'Poppins',sans-serif;font-size:1rem}
+  .btn-precios:hover{background:#000;color:#ff9f1c}
+  .campo{padding:12px;border-radius:12px;border:2px solid #ffe3ec;font-family:'Poppins',sans-serif;font-size:1rem;width:100%}
   @media(max-width:900px){
     body{flex-direction:column}
     .sidebar{width:100%;height:auto;border-radius:0 0 24px 24px;padding:12px 16px;gap:10px}
@@ -69,17 +52,16 @@
 </head>
 <body>
 
-<svg class="heart-clip"><clipPath id="heart" clipPathUnits="objectBoundingBox"><path d="M0.5,0.95 C0.1,0.65 0,0.4 0,0.28 C0,0.1 0.15,0 0.28,0 C0.4,0 0.47,0.07 0.5,0.15 C0.53,0.07 0.6,0 0.72,0 C0.85,0 1,0.1 1,0.28 C1,0.4 0.9,0.65 0.5,0.95 Z"/></clipPath></svg>
-
 <nav class="sidebar">
   <div class="sidebar-header"><h2>Mis Secciones</h2></div>
   <ul class="nav-list">
-    <li><a href="#categorias" class="nav-item active"><span>🎨 Color</span></a></li>
-    <li><a href="#categorias" class="nav-item"><span>✂️ Cortes</span></a></li>
-    <li><a href="#categorias" class="nav-item"><span>💧 Tratamientos</span></a></li>
-    <li><a href="#categorias" class="nav-item"><span>💇‍♀️ Extensiones</span></a></li>
-    <li><a href="#categorias" class="nav-item"><span>🧖‍♀️ Spa</span></a></li>
-    <li><a href="#categorias" class="nav-item"><span>✨ Alaciados</span></a></li>
+    <li><a href="#info-color" class="nav-item active"><span>🎨 Color</span></a></li>
+    <li><a href="#info-cortes" class="nav-item"><span>✂️ Cortes</span></a></li>
+    <li><a href="#info-tratamientos" class="nav-item"><span>💧 Tratamientos</span></a></li>
+    <li><a href="#info-extensiones" class="nav-item"><span>💇‍♀️ Extensiones</span></a></li>
+    <li><a href="#info-spa" class="nav-item"><span>🧖‍♀️ Spa</span></a></li>
+    <li><a href="#info-alaciados" class="nav-item"><span>✨ Alaciados</span></a></li>
+    <li><a href="#agendar" class="nav-item"><span>📅 Agenda tu Cita</span></a></li>
   </ul>
 </nav>
 
@@ -88,7 +70,6 @@
     <div class="titulo"><h1><span class="l1">Transforma</span><span class="l2">Brilla</span><span class="l3">Enamora tu pelo</span></h1></div>
   </div>
 
-  <!-- CARRUSEL 3D - IGUAL, SOLO IMÁGENES -->
   <section class="stage-container">
     <button class="flecha flecha-prev" id="prevBtn">&#10094;</button>
     <div class="carousel-track" id="track">
@@ -101,31 +82,22 @@
     <button class="flecha flecha-next" id="nextBtn">&#10095;</button>
   </section>
 
-  <!-- CARRUSEL INFINITO - IGUAL -->
-  <div class="carousel">
-    <div class="image-container">
-      <img src="img.png"><img src="img_1.png"><img src="img_2.png"><img src="img_3.png"><img src="pelo.jpg">
-      <img src="img.png"><img src="img_1.png"><img src="img_2.png"><img src="img_3.png"><img src="pelo.jpg">
+  <div style="background:#1a1a1a; padding:35px 20px; color:#fff; text-align:center;">
+    <h3 style="color:#ff9f1c; font-size:1.8rem; margin-bottom:18px;">📅 Horario de Atención</h3>
+    <div style="max-width:500px; margin:0 auto 25px auto; font-size:1.1rem; line-height:2;">
+      <p><b>Lunes a Viernes:</b> 10:00 am - 7:00 pm</p>
+      <p><b>Sábado:</b> 10:00 am - 5:00 pm</p>
+      <p><b>Domingo:</b> Cerrado</p>
     </div>
+    <a href="https://wa.me/52557771239813?text=Hola!%20Quiero%20agendar%20una%20cita%20💇‍♀️" target="_blank" style="display:inline-flex; align-items:center; gap:10px; background:#25D366; color:#fff; font-weight:800; padding:14px 28px; border-radius:50px; text-decoration:none; font-size:1.1rem; font-family:'Poppins',sans-serif;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:28px; height:28px;">
+      Agenda por WhatsApp
+    </a>
+    <p style="margin-top:12px; font-size:1rem; color:#ccc;">55 777 123 98 13</p>
+    <p style="margin-top:5px; font-size:.9rem; color:#999;">Click y te atendemos al momento 💬</p>
   </div>
 
-  <!-- CATEGORÍAS - AHORA CADA UNA TE LLEVA A SU INFO -->
-  <section class="categorias" id="categorias">
-    <h2>Nuestras Categorías</h2>
-    <p style="text-align:center;color:#777;margin:-25px 0 30px">Pícale a una figura para ver su información</p>
-    <div class="grid">
-      <a class="cat" href="#info-color"><div class="fig circulo">🎨</div>Color</a>
-      <a class="cat" href="#info-cortes"><div class="fig cuadrado">✂️</div>Cortes</a>
-      <a class="cat" href="#info-tratamientos"><div class="fig rectangulo">💧</div>Tratamientos</a>
-      <a class="cat" href="#info-extensiones"><div class="fig triangulo">💇‍♀️</div>Extensiones</a>
-      <a class="cat" href="#info-spa"><div class="fig diamante">🧖‍♀️</div>Spa</a>
-      <a class="cat" href="#info-alaciados"><div class="fig corazon">✨</div>Alaciados</a>
-    </div>
-  </section>
-
-  <!-- ===== INFO PARA MUJER - TODO NUEVO ABAJO ===== -->
   <section class="info-seccion">
-
     <div class="info-card" id="info-color">
       <h3>🎨 Color para Mujer <span>Lo más pedido</span></h3>
       <p>El color no es solo pintarte el pelo, es cambiar tu luz. Para mujer trabajamos según tu tono de piel, tu base natural y cuánto mantenimiento quieres.</p>
@@ -136,8 +108,7 @@
         <li><b>Fantasía:</b> Rosa, rojo, morado, azul. Necesita decoloración y retoque cada 3-4 semanas.</li>
         <li><b>Corrección de color:</b> Cuando el color quedó manchado o muy oscuro, se corrige poco a poco.</li>
       </ul>
-      <div class="tip">💡 <b>Tip de mujer:</b> Si es tu primera vez, empieza con balayage o babylights, no maltrata tanto y se ve super natural.</div>
-      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+      <button class="btn-precios" onclick="abrirPrecios('color')">Ver precios →</button>
     </div>
 
     <div class="info-card" id="info-cortes">
@@ -150,8 +121,7 @@
         <li><b>Fleco / Flequillo:</b> Cortina, recto o de lado. Cambia toda la cara.</li>
         <li><b>Degrafilado:</b> Para quitar peso y que el pelo no se vea tan grueso.</li>
       </ul>
-      <div class="tip">💡 <b>Tip de mujer:</b> Si tienes cara redonda, te quedan mejor las capas largas. Si tienes cara alargada, el fleco cortina te favorece mucho.</div>
-      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+      <button class="btn-precios" onclick="abrirPrecios('cortes')">Ver precios →</button>
     </div>
 
     <div class="info-card" id="info-tratamientos">
@@ -163,8 +133,7 @@
         <li><b>Tratamiento para caída:</b> Masaje + ampollas para fortalecer la raíz.</li>
         <li><b>Tratamiento para puntas abiertas:</b> Sella y repara sin tener que cortar todo.</li>
       </ul>
-      <div class="tip">💡 <b>Tip de mujer:</b> Después del tratamiento no te laves el pelo en 48 horas y no uses plancha muy caliente.</div>
-      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+      <button class="btn-precios" onclick="abrirPrecios('tratamientos')">Ver precios →</button>
     </div>
 
     <div class="info-card" id="info-extensiones">
@@ -176,8 +145,7 @@
         <li><b>Cortina cosida:</b> Para pelo grueso, da mucho volumen.</li>
         <li><b>Tape / Adhesivas:</b> Cintas planas, no se notan y no maltratan tanto.</li>
       </ul>
-      <div class="tip">💡 <b>Tip de mujer:</b> Para que no se noten, el color de la extensión debe ser igual al de tus puntas, no al de tu raíz.</div>
-      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+      <button class="btn-precios" onclick="abrirPrecios('extensiones')">Ver precios →</button>
     </div>
 
     <div class="info-card" id="info-spa">
@@ -189,8 +157,7 @@
         <li><b>Mascarilla + vapor:</b> Hidratación intensa con toalla caliente.</li>
         <li><b>Aromaterapia:</b> Aceites de coco, argán o lavanda para relajarte.</li>
       </ul>
-      <div class="tip">💡 <b>Tip de mujer:</b> Hazte spa 1 vez al mes si te planchas mucho o si tienes caspa o grasa.</div>
-      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+      <button class="btn-precios" onclick="abrirPrecios('spa')">Ver precios →</button>
     </div>
 
     <div class="info-card" id="info-alaciados">
@@ -202,10 +169,34 @@
         <li><b>Botox alaciador:</b> Alacia un poco y repara, para pelo maltratado.</li>
         <li><b>Alaciado exprés:</b> Solo quita frizz, no deja el pelo 100% lacio.</li>
       </ul>
-      <div class="tip">💡 <b>Tip de mujer:</b> Después del alaciado usa shampoo sin sulfatos para que te dure más, si no se te cae en 2 semanas.</div>
-      <a class="volver" href="#categorias">↑ Volver a categorías</a>
+      <button class="btn-precios" onclick="abrirPrecios('alaciados')">Ver precios →</button>
     </div>
+  </section>
 
+  <!-- ===== SECCION NUEVA: AGENDAR CITA - A3U3 ===== -->
+  <section class="info-seccion" id="agendar">
+    <div class="info-card">
+      <h3>📅 Agenda tu Cita <span>En vivo con Supabase</span></h3>
+      <p>Llena el formulario y tu cita se guarda en tiempo real en la base de datos.</p>
+      <form id="formCita" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
+        <input id="nombre" class="campo" placeholder="Tu nombre, ej. Maria Lopez" required>
+        <input id="telefono" class="campo" placeholder="Teléfono">
+        <select id="servicio" class="campo">
+          <option value="Corte">Corte</option>
+          <option value="Color">Color</option>
+          <option value="Tratamiento">Tratamiento</option>
+          <option value="Extensiones">Extensiones</option>
+          <option value="Spa">Spa</option>
+          <option value="Alaciado">Alaciado</option>
+        </select>
+        <input id="fecha" class="campo" type="date" required>
+        <input id="hora" class="campo" type="time" required>
+        <button type="submit" class="btn-precios">Guardar Cita</button>
+      </form>
+      <p id="mensaje" style="margin-top:10px; font-weight:700; color:#ff2e93;"></p>
+      <h4 style="margin-top:20px;">Citas guardadas en vivo:</h4>
+      <ul id="listaCitas" style="margin-top:10px; line-height:1.8;"></ul>
+    </div>
   </section>
 </main>
 
@@ -238,6 +229,26 @@
   stage.addEventListener('mouseenter',()=>clearInterval(autoSlide));
   stage.addEventListener('mouseleave',()=>{autoSlide=setInterval(()=>{currentIndex=(currentIndex+1)%cards.length;updateCarousel();},4000);});
   updateCarousel();
+
+  const PRECIOS = {
+    color: { titulo: '🎨 PRECIOS - COLOR', sub: 'Precios base, cabello corto a medio. Largo o abundante se cotiza en cita.', items: [['Tinte completo (un solo tono)', '$950'],['Retoque de raíz', '$650'],['Baño de color / Gloss', '$700'],['Mechas / Luces', '$1,800'],['Babylights', '$1,900'],['Balayage', '$2,300'],['Fantasía (rosa, morado, azul)', '$1,800'],['Decoloración', '$1,200'],['Corrección de color', 'Desde $2,500'],['Matizador', '$450']], nota: '💡 Si es tu primera vez, empieza con balayage o babylights, no maltrata tanto y se ve super natural.' },
+    cortes: { titulo: '✂️ PRECIOS - CORTES', sub: 'Todos los cortes incluyen lavado y peinado final.', items: [['Corte dama (cualquier estilo)', '$400'],['Corte Bob / Long Bob', '$450'],['Corte en Capas', '$400'],['Corte Degrafilado', '$400'],['Corte Shaggy / Wolf', '$450'],['Corte Pixie', '$450'],['Despunte / Solo puntas', '$250'],['Corte de fleco / Flequillo', '$150'],['Corte + Brushing', '$550']], nota: '💡 Si tienes cara redonda, te quedan mejor las capas largas. Si tienes cara alargada, el fleco cortina te favorece mucho.' },
+    tratamientos: { titulo: '💧 PRECIOS - TRATAMIENTOS', sub: 'Repara, hidrata y fortalece tu pelo.', items: [['Hidratación profunda + vapor', '$500'],['Botox capilar', '$850'],['Reconstrucción capilar', '$700'],['Tratamiento para caída + ampolla', '$650'],['Tratamiento puntas abiertas', '$450'],['Ampolla de queratina extra', '$200'],['Mascarilla intensiva', '$350']], nota: '💡 Después del tratamiento no te laves el pelo en 48 horas y no uses plancha muy caliente.' },
+    extensiones: { titulo: '💇‍♀️ PRECIOS - EXTENSIONES', sub: 'Precio por 100g de cabello natural. Incluye aplicación.', items: [['Extensiones de clip (100g)', '$1,800'],['Extensiones Tape / Adhesivas (100g)', '$3,200'],['Extensiones de queratina (100g)', '$3,500'],['Cortina cosida (100g)', '$3,000'],['Extensiones 18 pulgadas (100g)', '$2,990'],['Extensiones 22 pulgadas (100g)', '$3,850'],['Retiro de extensiones', '$400'],['Mantenimiento / Reajuste', '$600']], nota: '💡 Para que no se noten, el color de la extensión debe ser igual al de tus puntas, no al de tu raíz.' },
+    spa: { titulo: '🧖‍♀️ PRECIOS - SPA CAPILAR', sub: 'Spa Capilar para Mujer - Relájate.', items: [['Spa Básico', '$250'],['Spa + Masaje capilar', '$350'],['Spa + Hidratación profunda', '$400'],['Spa Premium', '$600'],['Limpieza profunda + Masaje', '$300'],['Masaje capilar extra', '$150'],['Aromaterapia', '$120'],['Mascarilla + Vapor', '$180']], nota: '💡 Hazte spa 1 vez al mes si te planchas mucho o si tienes caspa o grasa.' },
+    alaciados: { titulo: '✨ PRECIOS - ALACIADOS', sub: 'Precio base cabello medio. Largo o muy chino se cotiza.', items: [['Keratina / Alaciado brasileño', '$1,500'],['Nanoplastia', '$2,200'],['Alaciado japonés', '$2,800'],['Botox alaciador', '$1,200'],['Alaciado exprés (solo frizz)', '$600'],['Alaciado + Corte', '$1,800'],['Alaciado + Hidratación', '$1,900']], nota: '💡 Después del alaciado usa shampoo sin sulfatos para que te dure más, si no se te cae en 2 semanas.' }
+  };
+
+  function abrirPrecios(tipo){
+    const d = PRECIOS[tipo];
+    let filas = d.items.map(i => `<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed #eee;font-size:16px"><span>${i[0]}</span><b style="color:#ff2e93">${i[1]}</b></div>`).join('');
+    const win = window.open('', '_blank');
+    win.document.write(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${d.titulo}</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet"><style>body{font-family:'Poppins',Arial,sans-serif;background:#ffe3ec;margin:0;padding:20px;color:#1a1a1a}.box{max-width:700px;margin:0 auto;background:#fff;border-radius:24px;padding:28px;box-shadow:0 10px 25px rgba(0,0,0,.1)}h1{text-align:center;color:#ff2e93;margin-bottom:5px}p.sub{text-align:center;color:#555;margin-bottom:20px}.nota{text-align:center;margin-top:20px;background:#fff8e1;padding:12px;border-radius:14px;font-size:14px}</style></head><body><div class="box"><h1>${d.titulo}</h1><p class="sub">${d.sub}</p>${filas}<div class="nota">${d.nota}</div><p style="text-align:center;color:#999;font-size:12px;margin-top:15px">Precios en MXN. Pueden variar por largo y cantidad de cabello.</p></div></body></html>`);
+    win.document.close();
+  }
 </script>
+<!-- ESTA LÍNEA ES LA QUE FALTABA, VA ANTES DE supabase.js -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 </body>
 </html>
